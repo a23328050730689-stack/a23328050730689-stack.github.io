@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sabores Encantados - Tienda de Pasteles</title>
   <style>
-    /* Reset y básicos */
-    * { box-sizing: border-box; margin:0; padding:0; }
-    body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background: #f6f6f6; color: #333; min-height: 100vh; scroll-behavior: smooth; }
-    a { color: inherit; text-decoration: none; cursor: pointer; }
-    header { background: #c88be8; padding: 15px 30px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; position: sticky; top:0; z-index:100; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
-    .logo { display: flex; align-items: center; gap:10px; color:white; font-weight:bold; font-size:1.3rem; }
-    .logo img { width:45px; border-radius:6px; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:"Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background:#f6f6f6; color:#333; min-height:100vh; scroll-behavior:smooth; }
+    a { text-decoration:none; color:inherit; }
+    header { background:#c88be8; padding:15px 30px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+    .logo { display:flex; align-items:center; gap:10px; color:white; font-weight:bold; font-size:1.3rem; }
     nav { display:flex; gap:20px; flex-wrap:wrap; }
-    nav a { color:white; font-weight:600; padding:8px 10px; border-radius:6px; transition: background-color 0.3s ease; }
-    nav a:hover, nav a:focus { background: #a567e3; outline:none; }
+    nav a { color:white; font-weight:600; padding:8px 10px; border-radius:6px; transition:0.3s; }
+    nav a:hover { background:#a567e3; }
     .search-cart { display:flex; gap:15px; align-items:center; flex-wrap:wrap; }
     .search-cart input { padding:8px 14px; border-radius:20px; border:none; outline:none; min-width:180px; }
-    .cart { background:white; color:#7b2cbf; padding:8px 14px; border-radius:20px; font-weight:bold; display:flex; align-items:center; gap:6px; user-select:none; position:relative; cursor:pointer; }
+    .cart { background:white; color:#7b2cbf; padding:8px 14px; border-radius:20px; font-weight:bold; display:flex; align-items:center; gap:6px; cursor:pointer; position:relative; }
     .cart span { background:#ff4d4d; color:white; border-radius:50%; padding:2px 8px; font-size:0.8rem; min-width:22px; text-align:center; }
     h1.section-title { text-align:center; color:#8e44ad; margin:40px 20px 30px; }
     section { max-width:1200px; margin:auto; padding:0 20px 60px; }
@@ -30,19 +28,20 @@
     .prices { margin-bottom:15px; font-weight:600; font-size:1rem; }
     .old { text-decoration:line-through; color:#999; margin-right:10px; font-weight:normal; font-size:0.9rem; }
     .new { color:#8e44ad; font-weight:bold; font-size:1.1rem; }
-    button { background:#b36ae2; color:white; border:none; padding:10px 22px; border-radius:20px; cursor:pointer; font-size:0.95rem; transition: background-color 0.3s ease; }
-    button:hover, button:focus { background:#9b4dcc; outline:none; }
-    .info-section p { max-width:650px; margin:auto; line-height:1.5; margin-bottom:15px; color:#555; font-size:1rem; }
+    button { background:#b36ae2; color:white; border:none; padding:10px 22px; border-radius:20px; cursor:pointer; font-size:0.95rem; transition:0.3s; }
+    button:hover { background:#9b4dcc; }
+    .info-section p, .info-section ul { max-width:650px; margin:auto; margin-bottom:15px; color:#555; font-size:1rem; }
+    .info-section ul { list-style: disc; padding-left:25px; }
     .modal-bg { position:fixed; top:0; left:0; right:0; bottom:0; background: rgba(0,0,0,0.6); display:none; justify-content:center; align-items:center; z-index:200; }
     .modal-bg.active { display:flex; }
-    .modal { background:white; border-radius:14px; width:90%; max-width:450px; max-height:80vh; overflow-y:auto; padding:20px 25px; box-shadow:0 10px 30px rgba(0,0,0,0.3); display:flex; flex-direction:column; gap:15px; position:relative; }
+    .modal { background:white; border-radius:14px; width:90%; max-width:450px; max-height:80vh; overflow-y:auto; padding:20px 25px; display:flex; flex-direction:column; gap:15px; position:relative; }
     .modal h2 { color:#8e44ad; margin-bottom:15px; text-align:center; }
-    .modal .close-btn { position:absolute; top:15px; right:15px; background:#ff5a5a; border:none; color:white; font-weight:bold; font-size:1.2rem; border-radius:50%; width:30px; height:30px; cursor:pointer; line-height:28px; }
+    .close-btn { position:absolute; top:15px; right:15px; background:#ff5a5a; border:none; color:white; font-weight:bold; font-size:1.2rem; border-radius:50%; width:30px; height:30px; cursor:pointer; line-height:28px; }
     .cart-items { flex-grow:1; overflow-y:auto; }
     .cart-item { display:flex; justify-content:space-between; border-bottom:1px solid #ddd; padding:8px 0; font-size:1rem; }
     .cart-item span { font-weight:600; }
     .cart-total { font-weight:bold; font-size:1.2rem; text-align:right; margin-top:10px; }
-    .checkout-btn { background:#8e44ad; color:white; border:none; padding:12px; font-size:1rem; border-radius:12px; margin-top:20px; cursor:pointer; transition: background-color 0.3s ease; }
+    .checkout-btn { background:#8e44ad; color:white; border:none; padding:12px; font-size:1rem; border-radius:12px; margin-top:20px; cursor:pointer; transition:0.3s; }
     .checkout-btn:hover { background:#732d91; }
     .confirmation-msg { text-align:center; font-weight:600; color:#2e7d32; font-size:1.1rem; margin-top:20px; }
   </style>
@@ -51,7 +50,7 @@
 
 <header>
   <div class="logo">
-    <img src="https://img.icons8.com/dusk/64/cake.png" alt="Logo Pastelería" />
+    <img src="https://i.postimg.cc/Jn3G3Nk1/1.jpg" alt="Logo Pastelería" />
     Sabores Encantados
   </div>
   <nav>
@@ -62,32 +61,54 @@
   </nav>
   <div class="search-cart">
     <input id="searchInput" type="text" placeholder="🔍 Buscar pastel..." aria-label="Buscar pastel" />
-    <div id="cart" class="cart" aria-label="Carrito de compras" tabindex="0" role="button">
+    <div id="cart" class="cart" aria-label="Carrito de compras">
       🛒 Carrito <span id="cartCount">0</span>
     </div>
   </div>
 </header>
 
+<!-- Cotizaciones -->
 <section id="cotizaciones" class="info-section">
   <h1 class="section-title">Cotizaciones</h1>
-  <p>Consulta nuestros precios para pedidos especiales y eventos. Ofrecemos descuentos para grandes cantidades y entregas personalizadas.</p>
+  <p>¿Tienes un evento especial? Creamos el pastel perfecto para bodas, cumpleaños y más.</p>
+  <ul>
+    <li>Descuentos por pedidos mayores a 5 pasteles.</li>
+    <li>Decoración personalizada.</li>
+    <li>Entrega a domicilio disponible.</li>
+  </ul>
+  <p>Contáctanos: <a href="mailto:contacto@saboresencantados.com">contacto@saboresencantados.com</a></p>
 </section>
 
+<!-- Ubicaciones -->
 <section id="ubicaciones" class="info-section">
   <h1 class="section-title">Ubicaciones</h1>
-  <p>Visítanos en nuestra tienda principal o en nuestros puntos de venta en la ciudad. Estamos ubicados en el centro y contamos con entrega a domicilio.</p>
+  <p>Visítanos en nuestras sucursales y disfruta de nuestros pasteles recién horneados:</p>
+  <ul>
+    <li><strong>Tienda Principal:</strong> Calle Dulce #123, Centro, Ciudad</li>
+    <li><strong>Sucursal Norte:</strong> Av. Pastelero 456, Colonia La Fresa</li>
+    <li><strong>Horario:</strong> Lunes a Domingo: 9:00 AM – 8:00 PM</li>
+  </ul>
 </section>
 
+<!-- Ofertas / Productos -->
 <section id="ofertas">
-  <h1 class="section-title">Catálogo de Pasteles</h1>
+  <h1 class="section-title">Ofertas Especiales</h1>
+  <p>Descubre nuestros pasteles con precios especiales por tiempo limitado. ¡Endulza tu día sin gastar de más!</p>
   <div class="products" id="productList"></div>
 </section>
 
+<!-- Novedades -->
 <section id="novedades" class="info-section">
   <h1 class="section-title">Novedades</h1>
-  <p>Próximamente lanzaremos nuevos sabores y promociones especiales. ¡Mantente atento a nuestras redes sociales para no perderte nada!</p>
+  <p>¡Siempre estamos innovando! Próximamente nuevos sabores y promociones:</p>
+  <ul>
+    <li>Pastel Matcha con crema de fresa.</li>
+    <li>Pastel chocolate oscuro con caramelo salado.</li>
+    <li>Promociones de temporada como San Valentín o Día de la Madre.</li>
+  </ul>
 </section>
 
+<!-- Modal Carrito -->
 <div id="modal" class="modal-bg" aria-hidden="true" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
   <div class="modal">
     <button class="close-btn" aria-label="Cerrar carrito">&times;</button>
@@ -100,111 +121,112 @@
 </div>
 
 <script>
-  const products = [
-    { id:1, name:"Pastel Carlos V", desc:"Chocolate", oldPrice:170, newPrice:150, img:"https://www.elglobo.com.mx/cdn/shop/files/PastelCarlosV_500x.jpg?v=1706027530" },
-    { id:2, name:"Pastel Limón Light", desc:"0 Azúcar", oldPrice:300, newPrice:260, img:"https://imgs.search.brave.com/_6jdJaZWdObQ_TQODcddfRDbpPQE8KoL8hmFQF0MkY0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/c3VxaWVlLmNvbS5t/eC93cC1jb250ZW50/L3VwbG9hZHMvMjAy/My8xMC93ZWItcGFz/dGVsLWdhbGxldGEt/bGltb24tNi0xMjAw/eDYwMC5qcGc" },
-    { id:3, name:"Pastel Vainilla Real", desc:"Clásico", oldPrice:180, newPrice:160, img:"https://imgs.search.brave.com/9-TIZUI4qWiTIG5uUWV2YkeDsCmxSQAifLST4Vo0LdY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9sZWNh/cm96LmNvbS93cC1j/b250ZW50L3VwbG9h/ZHMvMjAyNC8wNS9h/dXRlbnRpY28tZGUt/dmFpbmlsbGEtcmVi/YW5hZGEuanBn" },
-    { id:4, name:"Pastel Fresa Delicia", desc:"Fresa natural", oldPrice:200, newPrice:175, img:"https://imgs.search.brave.com/NaZaKv7I4MZ3k5wa2-MPpaMtsDyZo6xrSrwp4LS2jFI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cGFzdGVsZXJpYWxl/dHkuY29tL29uL2Rl/bWFuZHdhcmUuc3Rh/dGljLy0vU2l0ZXMt/cGFzdGVsZXJpYWxl/dHkvZGVmYXVsdC9k/d2Q0NzE2MDA4L0Zv/dG9zJTIwUGFzdGVs/ZXJpYSUyMExldHkv/cGFzdGVsdGVudGFj/aSVDMyVCM25kZWZy/ZXNhXzEuanBn" },
-    { id:5, name:"Pastel Red Velvet", desc:"Clásico americano", oldPrice:250, newPrice:220, img:"https://imgs.search.brave.com/1uKGvihsHQGk_rDWKkxV2OhfQkAw7_zK0_9eOOz8gbo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9hcmFu/emF6dS5jb20vd3At/Y29udGVudC91cGxv/YWRzLzIwMjAvMDcv/cGFzdGVsLXJlZC12/ZWx2ZXQucG5nLndl/YnA" },
-    { id:6, name:"Pastel Cheesecake", desc:"Queso cremoso", oldPrice:270, newPrice:240, img:"https://imgs.search.brave.com/mVPcIVfkgNliX2rLw0wLXix-jjt0rgVX462EChb9vPo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wYXN0/ZWxlcmlhYWxjYXph/ci5teC93cC1jb250/ZW50L3VwbG9hZHMv/MjAyNS8wMy9jaGVl/c2VjYWtlLWRlLXph/cnphbW9yYS1wb3It/cGFzdGVsZXJpYS1h/bGNhemFyLmpwZw" }
-  ];
+const products = [
+  { id:1, name:"Pastel Carlos V", desc:"Chocolate", oldPrice:170, newPrice:150, img:"https://i.postimg.cc/Jn3G3Nk1/1.jpg" },
+  { id:2, name:"Pastel Limón Light", desc:"0 Azúcar", oldPrice:300, newPrice:260, img:"https://i.postimg.cc/VvGmV7Br/2.jpg" },
+  { id:3, name:"Pastel Vainilla Real", desc:"Clásico", oldPrice:180, newPrice:160, img:"https://i.postimg.cc/BvNrz5jY/3.jpg" },
+  { id:4, name:"Pastel Fresa Delicia", desc:"Fresa natural", oldPrice:200, newPrice:175, img:"https://i.postimg.cc/90Ykq7kx/4.jpg" },
+  { id:5, name:"Pastel Red Velvet", desc:"Clásico americano", oldPrice:250, newPrice:220, img:"https://i.postimg.cc/6pVxzP6t/5.jpg" },
+  { id:6, name:"Pastel Cheesecake", desc:"Queso cremoso", oldPrice:270, newPrice:240, img:"https://i.postimg.cc/ZK7kY6L3/6.jpg" }
+];
 
-  let cart = [];
+let cart = [];
 
-  const productList = document.getElementById("productList");
-  const cartCountEl = document.getElementById("cartCount");
-  const cartBtn = document.getElementById("cart");
-  const modal = document.getElementById("modal");
-  const cartItemsEl = document.getElementById("cartItems");
-  const cartTotalEl = document.getElementById("cartTotal");
-  const checkoutBtn = document.getElementById("checkoutBtn");
-  const confirmationMsg = document.getElementById("confirmationMsg");
-  const searchInput = document.getElementById("searchInput");
+const productList = document.getElementById("productList");
+const cartCountEl = document.getElementById("cartCount");
+const cartBtn = document.getElementById("cart");
+const modal = document.getElementById("modal");
+const cartItemsEl = document.getElementById("cartItems");
+const cartTotalEl = document.getElementById("cartTotal");
+const checkoutBtn = document.getElementById("checkoutBtn");
+const confirmationMsg = document.getElementById("confirmationMsg");
+const searchInput = document.getElementById("searchInput");
 
-  function displayProducts(filter="") {
-    productList.innerHTML="";
-    const filtered = products.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()));
-    if(filtered.length===0){ productList.innerHTML="<p>No se encontraron pasteles.</p>"; return; }
-    filtered.forEach(({id,name,desc,oldPrice,newPrice,img})=>{
-      const card = document.createElement("div");
-      card.className="card";
-      card.innerHTML=`
-        <div class="offer">Oferta</div>
-        <img src="${img}" alt="Imagen de ${name}" />
-        <h3>${name}</h3>
-        <p>${desc}</p>
-        <div class="prices">
-          <span class="old">$${oldPrice} MXN</span>
-          <span class="new">$${newPrice} MXN</span>
-        </div>
-        <button data-id="${id}">Agregar</button>
-      `;
-      productList.appendChild(card);
-    });
-    document.querySelectorAll(".card button").forEach(btn => {
-      btn.addEventListener("click", ()=>{ addToCart(parseInt(btn.getAttribute("data-id"))); });
-    });
-  }
+function displayProducts(filter="") {
+  productList.innerHTML="";
+  const filtered = products.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()));
+  if(filtered.length===0){ productList.innerHTML="<p>No se encontraron pasteles.</p>"; return; }
+  filtered.forEach(({id,name,desc,oldPrice,newPrice,img})=>{
+    const card = document.createElement("div");
+    card.className="card";
+    card.innerHTML=`
+      <div class="offer">Oferta</div>
+      <img src="${img}" alt="Imagen de ${name}" />
+      <h3>${name}</h3>
+      <p>${desc}</p>
+      <div class="prices">
+        <span class="old">$${oldPrice} MXN</span>
+        <span class="new">$${newPrice} MXN</span>
+      </div>
+      <button data-id="${id}">Agregar</button>
+    `;
+    productList.appendChild(card);
+  });
+  document.querySelectorAll(".card button").forEach(btn => {
+    btn.addEventListener("click", ()=>{ addToCart(parseInt(btn.getAttribute("data-id"))); });
+  });
+}
 
-  function addToCart(id){
-    const product = products.find(p=>p.id===id);
-    if(!product) return;
-    const item = cart.find(i=>i.id===id);
-    if(item){ item.quantity++; } else { cart.push({...product, quantity:1}); }
-    updateCartCount();
-  }
+function addToCart(id){
+  const product = products.find(p=>p.id===id);
+  if(!product) return;
+  const item = cart.find(i=>i.id===id);
+  if(item){ item.quantity++; } else { cart.push({...product, quantity:1}); }
+  updateCartCount();
+}
 
-  function updateCartCount(){
-    const total = cart.reduce((acc,i)=>acc+i.quantity,0);
-    cartCountEl.textContent=total;
-  }
+function updateCartCount(){
+  const total = cart.reduce((acc,i)=>acc+i.quantity,0);
+  cartCountEl.textContent=total;
+}
 
-  function showCart(){
-    confirmationMsg.style.display="none";
-    renderCartItems();
-    modal.classList.add("active");
-    modal.setAttribute("aria-hidden","false");
-  }
+function showCart(){
+  confirmationMsg.style.display="none";
+  renderCartItems();
+  modal.classList.add("active");
+  modal.setAttribute("aria-hidden","false");
+}
 
-  function closeCart(){
-    modal.classList.remove("active");
-    modal.setAttribute("aria-hidden","true");
-  }
+function closeCart(){
+  modal.classList.remove("active");
+  modal.setAttribute("aria-hidden","true");
+}
 
-  function renderCartItems(){
-    cartItemsEl.innerHTML="";
-    if(cart.length===0){ cartItemsEl.innerHTML="<p>Tu carrito está vacío.</p>"; cartTotalEl.textContent=""; checkoutBtn.style.display="none"; return; }
-    checkoutBtn.style.display="block";
-    let total=0;
-    cart.forEach(item=>{
-      const itemTotal = item.newPrice*item.quantity;
-      total+=itemTotal;
-      const div=document.createElement("div");
-      div.className="cart-item";
-      div.innerHTML=`<span>${item.name} x${item.quantity}</span><span>$${itemTotal.toFixed(2)} MXN</span>`;
-      cartItemsEl.appendChild(div);
-    });
-    cartTotalEl.textContent=`Total: $${total.toFixed(2)} MXN`;
-  }
+function renderCartItems(){
+  cartItemsEl.innerHTML="";
+  if(cart.length===0){ cartItemsEl.innerHTML="<p>Tu carrito está vacío.</p>"; cartTotalEl.textContent=""; checkoutBtn.style.display="none"; return; }
+  checkoutBtn.style.display="block";
+  let total=0;
+  cart.forEach(item=>{
+    const itemTotal = item.newPrice*item.quantity;
+    total+=itemTotal;
+    const div=document.createElement("div");
+    div.className="cart-item";
+    div.innerHTML=`<span>${item.name} x${item.quantity}</span><span>$${itemTotal.toFixed(2)} MXN</span>`;
+    cartItemsEl.appendChild(div);
+  });
+  cartTotalEl.textContent=`Total: $${total.toFixed(2)} MXN`;
+}
 
-  function checkout(){
-    if(cart.length===0) return;
-    confirmationMsg.textContent="¡Gracias por tu compra! Tu pedido está en camino 🚚💨";
-    confirmationMsg.style.display="block";
-    cart=[];
-    updateCartCount();
-    renderCartItems();
-  }
+function checkout(){
+  if(cart.length===0) return;
+  confirmationMsg.textContent="¡Gracias por tu compra! Tu pedido está en camino 🚚💨";
+  confirmationMsg.style.display="block";
+  cart=[];
+  updateCartCount();
+  renderCartItems();
+}
 
-  cartBtn.addEventListener("click", showCart);
-  document.querySelector(".close-btn").addEventListener("click", closeCart);
-  checkoutBtn.addEventListener("click", checkout);
-  modal.addEventListener("click", e=>{ if(e.target===modal) closeCart(); });
-  searchInput.addEventListener("input", e=>displayProducts(e.target.value));
+cartBtn.addEventListener("click", showCart);
+document.querySelector(".close-btn").addEventListener("click", closeCart);
+checkoutBtn.addEventListener("click", checkout);
+modal.addEventListener("click", e=>{ if(e.target===modal) closeCart(); });
+searchInput.addEventListener("input", e=>displayProducts(e.target.value));
 
-  displayProducts();
+displayProducts();
 </script>
 
 </body>
 </html>
+
 
