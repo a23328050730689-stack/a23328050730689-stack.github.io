@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Sabores Encantados</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f6f6f6;
+      color: #333;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background: #c88be8;
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .logo img {
+      width: 45px;
+      border-radius: 6px;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      color: white;
+      font-weight: 500;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .search-cart {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .search-cart input {
+      padding: 8px 14px;
+      border-radius: 20px;
+      border: none;
+      outline: none;
+    }
+
+    .cart {
+      background: white;
+      color: #7b2cbf;
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+
+    .cart span {
+      background: #ff4d4d;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 7px;
+      font-size: 0.8rem;
+      margin-left: 5px;
+    }
+
+    /* ===== TITLE ===== */
+    h1 {
+      text-align: center;
+      color: #8e44ad;
+      margin: 40px 0 20px;
+    }
+
+    /* ===== PRODUCTS ===== */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+      padding: 0 40px 60px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .offer {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: #ff5a5a;
+      color: white;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+    }
+
+    .card img {
+      width: 100%;
+      max-width: 200px;
+      margin: 10px auto 15px;
+      display: block;
+    }
+
+    .card h3 {
+      margin: 10px 0 5px;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #777;
+      margin-bottom: 10px;
+    }
+
+    .prices {
+      margin-bottom: 15px;
+    }
+
+    .old {
+      text-decoration: line-through;
+      color: #999;
+      margin-right: 8px;
+    }
+
+    .new {
+      color: #8e44ad;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    button {
+      background: #b36ae2;
+      color: white;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    button:hover {
+      background: #9b4dcc;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="https://via.placeholder.com/60x60?text=🍰">
+      Sabores Encantados
+    </div>
+
+    <nav>
+      <a href="#">Cotizaciones</a>
+      <a href="#">Ubicaciones</a>
+      <a href="#">Ofertas</a>
+      <a href="#">Novedades</a>
+    </nav>
+
+    <div class="search-cart">
+      <input type="text" placeholder="🔍 Buscar pastel...">
+      <div class="cart">
+        🛒 Carrito <span>0</span>
+      </div>
+    </div>
+  </header>
+
+  <h1>Catálogo de Pasteles</h1>
+
+  <section class="products">
+
+    <div class="card">
+      <div class="offer">Oferta</div>
+      <img src="https://via.placeholder.com/300x200?text=Pastel+Chocolate">
+      <h3>Pastel Carlos V</h3>
+      <p>Chocolate</p>
+      <div class="prices">
+        <span class="old">$170 MXN</span>
+        <span class="new">$150 MXN</span>
+      </div>
+      <button>Agregar</button>
+    </div>
+
+    <div class="card">
+      <div class="offer">Oferta</div>
+      <img src="https://via.placeholder.com/300x200?text=Pastel+Limón">
+      <h3>Pastel Limón Light</h3>
+      <p>0 Azúcar</p>
+      <div class="prices">
+        <span class="old">$300 MXN</span>
+        <span class="new">$260 MXN</span>
+      </div>
+      <button>Agregar</button>
+    </div>
+
+  </section>
+
+</body>
+</html>
